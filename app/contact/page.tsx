@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FiPhone, FiMail, FiMapPin, FiArrowRight, FiCheckCircle } from "react-icons/fi";
-import SpecialOffers from "@/components/sections/SpecialOffers";
 
 type FormData = {
   name: string;
@@ -56,8 +55,6 @@ export default function ContactPage() {
           </p>
         </div>
       </section>
-
-      <SpecialOffers />
 
       {/* Form + Info */}
       <section className="py-20 bg-white">
