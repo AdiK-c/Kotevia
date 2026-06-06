@@ -1,6 +1,9 @@
 import dbConnect from "@/lib/mongodb";
 import Lead from "@/models/Lead";
-import { FiMail, FiPhone, FiMapPin } from "react-icons/fi";
+import { FiMail, FiPhone, FiMapPin, FiLogOut } from "react-icons/fi";
+import { cookies } from "next/headers";
+import AdminLogin from "@/components/admin/AdminLogin";
+import { logout } from "@/app/admin/actions";
 
 // Ensure this page is dynamically rendered
 export const dynamic = "force-dynamic";
@@ -18,6 +21,13 @@ async function getLeads() {
 }
 
 export default async function AdminDashboard() {
+  const cookieStore = cookies();
+  const auth = cookieStore.get("admin_auth")?.value;
+
+  if (!process.env.ADMIN_PASSWORD || auth !== process.env.ADMIN_PASSWORD) {
+    return <AdminLogin />;
+  }
+
   const leads = await getLeads();
 
   return (
@@ -25,8 +35,15 @@ export default async function AdminDashboard() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-black">Lead Management</h1>
-          <div className="bg-white px-4 py-2 rounded shadow-sm border border-gray-100 text-sm font-medium">
-            Total Leads: {leads.length}
+          <div className="flex items-center gap-4">
+            <div className="bg-white px-4 py-2 rounded shadow-sm border border-gray-100 text-sm font-medium">
+              Total Leads: {leads.length}
+            </div>
+            <form action={logout}>
+              <button type="submit" className="flex items-center gap-2 bg-red-50 text-red-600 px-4 py-2 rounded shadow-sm border border-red-100 text-sm font-medium hover:bg-red-100 transition-colors">
+                <FiLogOut /> Logout
+              </button>
+            </form>
           </div>
         </div>
 
