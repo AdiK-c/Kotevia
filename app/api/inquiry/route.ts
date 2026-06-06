@@ -45,8 +45,8 @@ export async function POST(req: NextRequest) {
     console.log("New inquiry saved to DB and email sent:", { name, phone, email, city, installationType });
 
     return NextResponse.json({ success: true, message: "Inquiry submitted successfully" }, { status: 200 });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Inquiry API error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json({ error: error.message || "Internal server error" }, { status: 500 });
   }
 }
