@@ -6,7 +6,6 @@ import WhyUs from "@/components/sections/WhyUs";
 import HowItWorks from "@/components/sections/HowItWorks";
 import Calculator from "@/components/sections/Calculator";
 import Testimonials from "@/components/sections/Testimonials";
-import BlogPreview from "@/components/sections/BlogPreview";
 import CTABanner from "@/components/sections/CTABanner";
 
 export default function Home() {
@@ -20,7 +19,6 @@ export default function Home() {
       <HowItWorks />
       <Calculator />
       <Testimonials />
-      <BlogPreview />
       <CTABanner />
     </>
   );
