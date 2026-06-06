@@ -23,9 +23,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? "bg-white border-b border-gray-200 shadow-sm" : "bg-transparent"
-    }`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm`}>
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
         <Link href="/" className="flex items-center gap-3">
           <Image src="/logo.jpg" alt="Kotevia Solar Solutions Logo" width={56} height={56} className="object-contain rounded-full" priority />
