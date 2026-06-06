@@ -29,9 +29,13 @@ export default function ContactPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
+      
       if (res.ok) {
         setSubmitted(true);
         window.location.href = "/thank-you";
+      } else {
+        const errorData = await res.json();
+        alert(`Failed to submit: ${errorData.error || 'Server Error'}. Make sure your database is connected!`);
       }
     } catch {
       alert("Something went wrong. Please try again.");
