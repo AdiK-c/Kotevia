@@ -29,36 +29,40 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center p-6">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
-        <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 mx-auto shadow-sm">
-          <FiLock className="text-blue-500 text-3xl" />
+    <div className="min-h-screen bg-[#F8FAFC] flex flex-col justify-center items-center p-6 relative overflow-hidden">
+      {/* Aesthetic Background Orbs */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full blur-[100px] opacity-60 translate-x-1/3 -translate-y-1/3"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gray-200 rounded-full blur-[100px] opacity-60 -translate-x-1/3 translate-y-1/3"></div>
+
+      <div className="w-full max-w-md bg-white/80 backdrop-blur-xl rounded-[2rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] border border-white p-10 relative z-10">
+        <div className="w-16 h-16 bg-blue-50/50 rounded-2xl flex items-center justify-center mb-6 mx-auto shadow-sm border border-blue-100/50">
+          <FiLock className="text-blue-600 text-2xl" />
         </div>
         
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-2">Admin Login</h2>
-        <p className="text-center text-gray-500 mb-8">Enter your password to access the dashboard</p>
+        <h2 className="text-3xl font-extrabold text-center text-gray-900 mb-2 tracking-tight">Admin Portal</h2>
+        <p className="text-center text-gray-500 mb-8 font-medium">Enter your password to continue</p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+            <label className="block text-sm font-bold text-gray-700 mb-2 ml-1">Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
-              placeholder="Enter admin password"
+              className="w-full px-5 py-4 rounded-xl bg-gray-50/50 border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none font-medium"
+              placeholder="••••••••"
               required
             />
           </div>
 
-          {error && <p className="text-red-500 text-sm font-medium">{error}</p>}
+          {error && <p className="text-red-500 text-sm font-semibold ml-1">{error}</p>}
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-black text-white font-bold py-3 px-4 rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-70"
+            className="w-full bg-black text-white font-bold py-4 px-4 rounded-xl shadow-lg shadow-black/10 hover:shadow-xl hover:-translate-y-0.5 transition-all disabled:opacity-70 disabled:hover:translate-y-0"
           >
-            {loading ? "Authenticating..." : "Login"}
+            {loading ? "Authenticating..." : "Secure Login"}
           </button>
         </form>
       </div>

@@ -31,77 +31,83 @@ export default async function AdminDashboard() {
   const leads = await getLeads();
 
   return (
-    <div className="pt-32 pb-16 bg-gray-50 min-h-screen">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-black">Lead Management</h1>
+    <div className="pt-32 pb-24 bg-[#F8FAFC] min-h-screen relative overflow-hidden">
+      {/* Background aesthetic blobs */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-100/40 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+          <div>
+            <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">Lead Management</h1>
+            <p className="text-gray-500 mt-2 font-medium">View and manage your incoming solar inquiries.</p>
+          </div>
           <div className="flex items-center gap-4">
-            <div className="bg-white px-4 py-2 rounded shadow-sm border border-gray-100 text-sm font-medium">
-              Total Leads: {leads.length}
+            <div className="bg-white/80 backdrop-blur-md px-5 py-2.5 rounded-full shadow-sm border border-white text-sm font-bold text-gray-700">
+              Total Leads: <span className="text-blue-600">{leads.length}</span>
             </div>
             <form action={logout}>
-              <button type="submit" className="flex items-center gap-2 bg-red-50 text-red-600 px-4 py-2 rounded shadow-sm border border-red-100 text-sm font-medium hover:bg-red-100 transition-colors">
+              <button type="submit" className="flex items-center gap-2 bg-white/80 backdrop-blur-md text-red-600 px-5 py-2.5 rounded-full shadow-sm border border-white text-sm font-bold hover:bg-red-50 hover:border-red-100 hover:shadow-md transition-all">
                 <FiLogOut /> Logout
               </button>
             </form>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="bg-white/80 backdrop-blur-xl rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-black text-white text-sm uppercase tracking-wider">
-                  <th className="p-4 font-semibold">Date</th>
-                  <th className="p-4 font-semibold">Customer info</th>
-                  <th className="p-4 font-semibold">Location</th>
-                  <th className="p-4 font-semibold">Requirement</th>
-                  <th className="p-4 font-semibold">Status</th>
+                <tr className="bg-gray-900 text-white text-xs uppercase tracking-widest">
+                  <th className="p-5 font-bold">Date</th>
+                  <th className="p-5 font-bold">Customer info</th>
+                  <th className="p-5 font-bold">Location</th>
+                  <th className="p-5 font-bold">Requirement</th>
+                  <th className="p-5 font-bold">Status</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100 text-sm">
                 {leads.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="p-8 text-center text-gray-500">
-                      No leads found.
+                    <td colSpan={5} className="p-12 text-center text-gray-500 font-medium">
+                      No leads found. When customers submit forms, they will appear here.
                     </td>
                   </tr>
                 ) : (
                   leads.map((lead: any) => (
-                    <tr key={lead._id.toString()} className="hover:bg-gray-50 transition-colors">
-                      <td className="p-4 text-gray-500 whitespace-nowrap">
-                        {new Date(lead.createdAt).toLocaleDateString()}
+                    <tr key={lead._id.toString()} className="hover:bg-blue-50/50 transition-colors group">
+                      <td className="p-5 text-gray-500 whitespace-nowrap font-medium">
+                        {new Date(lead.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}
                       </td>
-                      <td className="p-4">
-                        <div className="font-bold text-black">{lead.name}</div>
-                        <div className="flex items-center text-gray-500 mt-1 gap-1">
-                          <FiPhone className="text-xs" /> {lead.phone}
+                      <td className="p-5">
+                        <div className="font-extrabold text-gray-900 text-base">{lead.name}</div>
+                        <div className="flex items-center text-gray-500 mt-1.5 gap-2 font-medium">
+                          <FiPhone className="text-blue-500" /> {lead.phone}
                         </div>
-                        <div className="flex items-center text-gray-500 mt-1 gap-1">
-                          <FiMail className="text-xs" /> {lead.email}
+                        <div className="flex items-center text-gray-500 mt-1 gap-2 font-medium">
+                          <FiMail className="text-blue-500" /> {lead.email}
                         </div>
                       </td>
-                      <td className="p-4">
-                        <div className="flex items-center text-black font-medium gap-1">
+                      <td className="p-5">
+                        <div className="flex items-center text-gray-900 font-bold gap-2">
                           <FiMapPin className="text-gray-400" /> {lead.city}
                         </div>
-                        <div className="text-gray-500 mt-1">Pin: {lead.pincode}</div>
+                        <div className="text-gray-500 mt-1.5 font-medium ml-6">Pin: {lead.pincode}</div>
                       </td>
-                      <td className="p-4">
-                        <span className="inline-block px-2 py-1 bg-gray-100 rounded text-xs font-bold text-black mb-1">
+                      <td className="p-5">
+                        <span className="inline-block px-3 py-1 bg-gray-100 border border-gray-200 rounded-full text-xs font-bold text-gray-700 mb-2">
                           {lead.installationType}
                         </span>
-                        <div className="text-gray-600 mt-1">Bill: {lead.monthlyBill}</div>
-                        {lead.roofSize && <div className="text-gray-500 mt-1">Roof: {lead.roofSize}</div>}
+                        <div className="text-gray-600 font-medium">Bill: <span className="font-bold text-gray-900">{lead.monthlyBill}</span></div>
+                        {lead.roofSize && <div className="text-gray-500 mt-1 font-medium">Roof: {lead.roofSize} sq ft</div>}
                       </td>
-                      <td className="p-4">
-                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                          lead.status === "New" ? "bg-blue-100 text-blue-800" :
-                          lead.status === "Contacted" ? "bg-yellow-100 text-yellow-800" :
-                          lead.status === "Qualified" ? "bg-green-100 text-green-800" :
-                          "bg-red-100 text-red-800"
+                      <td className="p-5">
+                        <span className={`px-4 py-1.5 rounded-full text-xs font-extrabold tracking-wide uppercase shadow-sm ${
+                          lead.status === "New" ? "bg-blue-100 text-blue-700 border border-blue-200" :
+                          lead.status === "Contacted" ? "bg-yellow-100 text-yellow-700 border border-yellow-200" :
+                          lead.status === "Qualified" ? "bg-green-100 text-green-700 border border-green-200" :
+                          "bg-red-100 text-red-700 border border-red-200"
                         }`}>
-                          {lead.status}
+                          {lead.status || "NEW"}
                         </span>
                       </td>
                     </tr>
