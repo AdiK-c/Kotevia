@@ -10,7 +10,8 @@ export async function login(password: string) {
   }
 
   if (password === adminPassword) {
-    cookies().set("admin_auth", password, { 
+    const cookieStore = await cookies();
+    cookieStore.set("admin_auth", password, { 
       httpOnly: true, 
       secure: process.env.NODE_ENV === "production",
       maxAge: 60 * 60 * 24 * 7 // 1 week
@@ -22,6 +23,7 @@ export async function login(password: string) {
 }
 
 export async function logout() {
-  cookies().delete("admin_auth");
+  const cookieStore = await cookies();
+  cookieStore.delete("admin_auth");
   redirect("/admin");
 }

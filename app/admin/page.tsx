@@ -21,7 +21,7 @@ async function getLeads() {
 }
 
 export default async function AdminDashboard() {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const auth = cookieStore.get("admin_auth")?.value;
 
   if (!process.env.ADMIN_PASSWORD || auth !== process.env.ADMIN_PASSWORD) {
