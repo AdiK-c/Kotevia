@@ -8,6 +8,8 @@ import Calculator from "@/components/sections/Calculator";
 import Testimonials from "@/components/sections/Testimonials";
 import CTABanner from "@/components/sections/CTABanner";
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   return (
     <>
